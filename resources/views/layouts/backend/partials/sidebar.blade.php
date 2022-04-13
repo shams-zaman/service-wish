@@ -50,6 +50,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item  {{ Request::is('admin/quote-request') ? 'active' : '' }} ">
+                        <a href="{{ route('admin.quote_req') }}" class="nav-link">
+                            <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                            <span class="" style="font-size: .9rem;">New Quote Req_</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item  {{ Request::is('admin/all_users') ? 'active' : '' }} ">
                         <a href="{{ route('admin.all_users') }}" class="nav-link">
                             <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
@@ -70,6 +77,25 @@
                     </li>
 
 
+                    <li class="nav-item">
+                        <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                            data-toggle="collapse" data-target="#submenu-pages">
+                            <span>
+                                <span class="sidebar-icon"><span class="far fa-file-alt"></span></span>
+                                Mananage Blog
+                            </span>
+                            <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                        </span>
+                        <div class="multi-level collapse " role="list" id="submenu-pages" aria-expanded="false">
+                            <ul class="flex-column nav">
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('admin.all_blogs') }}"><span>Blog Posts</span></a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="../../pages/examples/sign-up.html"><span>Sign Up</span></a></li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                             data-toggle="collapse" data-target="#submenu-pages">
@@ -103,6 +129,21 @@
                     </li>
                 @else
                 @endif
+                @if (Request::is('myagency*'))
+                    <li class="nav-item  {{ Request::is('myagency/dashboard') ? 'active' : '' }} ">
+                        <a href="{{ route('agency.dashboard') }}" class="nav-link">
+                            <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                            <span class="" style="font-size: .9rem;">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ Request::is('myagency/profile') ? 'active' : '' }} ">
+                        <a href="{{ route('agency.profile') }}" class="nav-link">
+                            <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                            <span class="" style="font-size: .9rem;">Dashboard</span>
+                        </a>
+                    </li>
+                @endif
+
                 {{-- <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
                 <li class="nav-item">
                     <a href="../../index.html" class="nav-link d-flex align-items-center">

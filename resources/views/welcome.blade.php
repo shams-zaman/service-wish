@@ -262,13 +262,13 @@
                                 </div>
                                 <ul class="bl">
                                     <li>
-                                        <a href="pricing-details.html">Sign in</a>
+                                        <a href="{{route('login')}}">Sign in</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-success" href="login.html">Create an account</a>
+                                        <a class="btn btn-success" href="{{route('register')}}">Create an account</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-info" href="login3d2e.html?login=register">Become a
+                                        <a class="btn btn-info" href="{{route('register')}}">Become a
                                             Developer</a>
                                     </li>
                                 </ul>
@@ -284,7 +284,7 @@
                                                     <a href="pricing-details.html">Sign</a>
                                                 </li>
                                                 <li>
-                                                    <a href="login.html">Sign in</a>
+                                                    <a href="{{route('login')}}">Sign in</a>
                                                 </li>
                                                 <li>
                                                     <a href="login3d2e.html?login=register">Create an account</a>
@@ -591,7 +591,7 @@
                             @endforeach
 
                         </ul>
-                        <a href="all-category.html" class="more">View all services</a>
+                        <a href="{{ route('all_agency') }}" class="more">View all services</a>
                     </div>
                 </div>
             </div>
@@ -617,7 +617,7 @@
                                     </div>
                                     <div>
                                         <img src="{{ asset('assets/images/services/1.html') }}" alt="">
-                                        <h4>Real Estate</h4>
+                                        <h4>{{ $top_cat->cat_name }}</h4>
                                         <div class="list-rat-all">
                                             <b>4.4</b>
                                             <label class="rat">
@@ -631,104 +631,38 @@
                                         </div>
                                         <p>09Listings</p>
                                     </div>
-                                    <a href="all-listing/real-estate.html" class="fclick">&nbsp;</a>
+                                    <a href="{{ route('showagn', $top_cat->slug) }}"
+                                        class="fclick">&nbsp;</a>
                                 </div>
                             </li>
-                            <li>
-                                <div class="hcity">
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/27799pexels-pixabay-159823.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/1185pexels-buro-millennial-1438081.jpg') }}"
-                                            alt="">
-                                        <h4>Education</h4>
-                                        <div class="list-rat-all">
-                                            <b>3.7</b>
-                                            <label class="rat">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons ratstar">star</i>
-                                            </label>
-                                            <span>3Reviews</span>
+                            @foreach ($other_cats as $item)
+                                <li>
+                                    <div class="hcity">
+                                        <div>
+                                            <img src="{{ asset('assets/images/services/27799pexels-pixabay-159823.jpg') }}"
+                                                alt="">
                                         </div>
-                                        <p>06Listings</p>
-                                    </div>
-                                    <a href="all-listing/education.html" class="fclick">&nbsp;</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="hcity">
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/8370pexels-photo-263402.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/20356s7.html') }}" alt="">
-                                        <h4>Hospitals</h4>
-                                        <div class="list-rat-all">
-                                            <b>0 Ratings</b>
+                                        <div>
+                                            <img src="{{ asset('assets/images/services/1185pexels-buro-millennial-1438081.jpg') }}"
+                                                alt="">
+                                            <h4>{{ $item->cat_name }}</h4>
+                                            <div class="list-rat-all">
+                                                <b>3.7</b>
+                                                <label class="rat">
+                                                    <i class="material-icons">star</i>
+                                                    <i class="material-icons">star</i>
+                                                    <i class="material-icons">star</i>
+                                                    <i class="material-icons">star</i>
+                                                    <i class="material-icons ratstar">star</i>
+                                                </label>
+                                                <span>3Reviews</span>
+                                            </div>
+                                            <p>06Listings</p>
                                         </div>
-                                        <p>05Listings</p>
+                                        <a href="{{ route('showagn', $item->slug) }}" class="fclick">&nbsp;</a>
                                     </div>
-                                    <a href="all-listing/hospitals.html" class="fclick">&nbsp;</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="hcity">
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/87731pexels-pixabay-461064.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/88878hangouts-800x391.html') }}"
-                                            alt="">
-                                        <h4>Technology</h4>
-                                        <div class="list-rat-all">
-                                            <b>3.0</b>
-                                            <label class="rat">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons ratstar">star</i>
-                                                <i class="material-icons ratstar">star</i>
-                                            </label>
-                                            <span>3Reviews</span>
-                                        </div>
-                                        <p>05Listings</p>
-                                    </div>
-                                    <a href="all-listing/technology.html" class="fclick">&nbsp;</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="hcity">
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/1158326574pexels-photo-3997981.jpg') }}"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <img src="{{ asset('assets/images/services/4020726574pexels-photo-3997981.jpg') }}"
-                                            alt="">
-                                        <h4>Spa and Facial</h4>
-                                        <div class="list-rat-all">
-                                            <b>4.3</b>
-                                            <label class="rat">
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                                <i class="material-icons">star</i>
-                                            </label>
-                                            <span>3Reviews</span>
-                                        </div>
-                                        <p>05Listings</p>
-                                    </div>
-                                    <a href="all-listing/spa-and-facial.html" class="fclick">&nbsp;</a>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -986,8 +920,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="3" name="enquiry_message"
-                                        placeholder="Enter your query or message"></textarea>
+                                    <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                                 </div>
                                 <input type="hidden" id="source">
                                 <button type="submit" id="home_enquiry_submit" name="home_enquiry_submit"
@@ -1605,8 +1538,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="enquiry_message"
-                        placeholder="Enter your query or message"></textarea>
+                    <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                 </div>
                 <input type="hidden" id="source">
                 <button type="submit" id="home_slide_enquiry_submit" name="home_slide_enquiry_submit"

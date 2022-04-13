@@ -19,6 +19,7 @@ class CreateSpsTable extends Migration
             $table->string('ag_slug');
             $table->string('address');
             $table->string('image')->default('default.png');
+            $table->string('image_id')->nullable();
             $table->integer('zip');
             $table->bigInteger('user_id')->unsigned();
 

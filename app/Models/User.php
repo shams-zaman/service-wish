@@ -55,6 +55,10 @@ class User extends Authenticatable
     }
     public function sp()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Sp::class);
+    }
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
     }
 }

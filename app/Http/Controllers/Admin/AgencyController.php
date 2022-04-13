@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cat;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\Sp;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class AgencyController extends Controller
 {
+
     public function showagn($slug)
     {
         if (Cat::where('slug', $slug)->exists()) {
@@ -32,10 +34,23 @@ class AgencyController extends Controller
             return "Invalid Agency";
         }
     }
+    public function ag_details_enq($slug)
+    {
+        if (Sp::where('ag_slug', $slug)->exists()) {
+            $result =  Sp::where('ag_slug', $slug)->first();
+
+            return view('frontend.job_desc_enq', compact('result'));
+        } else {
+            return "Invalid Agency";
+        }
+    }
+
     public function all_agency()
     {
-        $result = Sp::all();
-        return view('all_agency', compact('result'));
+        $results = Sp::paginate(7);
+
+        // return view('all_agency');
+        return view('all_agency', compact('results'));
     }
     public function agency_desc($id)
     {

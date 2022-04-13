@@ -2,6 +2,9 @@
 @section('content')
     <!-- END -->
     <!-- START -->
+    @push('css')
+        {{-- <link rel="stylesheet" href="{{ asset('frontend/css/agency_list_page.css') }}"> --}}
+    @endpush
     <section>
         <div class="all-listing all-listing-pg">
             <!--FILTER ON MOBILE VIEW-->
@@ -34,7 +37,6 @@
                                 <div class="tit">
                                     <h4>Top Service Providers</h4>
                                 </div>
-
                             </div>
                             <!--END-->
                             <!--START-->
@@ -53,8 +55,6 @@
                             <!--END-->
                             <!--START-->
                             <div class="filt-com lhs-cate">
-
-
                             </div>
                             <!--END-->
                             <!--START-->
@@ -287,8 +287,7 @@
                                                 required="">
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" rows="3" name="enquiry_message"
-                                                placeholder="Enter your query or message"></textarea>
+                                            <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                                         </div>
                                         <input type="hidden" id="source">
                                         <button type="submit" id="home_slide_enquiry_submit"
@@ -362,10 +361,19 @@
                             <div id="loadingmessage1">&nbsp;</div>
                         </div>
                         <!-- Loader Image -->
-                        <div class="all-list-sh all-listing-total">
+                        {{-- <@livewire('allagency') --}}
+                        {{-- serarch --}}
+                        {{-- <div class="col col-md-6 col-lg-3 offset-lg-3 col-xl-4">
+                  <div class="input-group">
+                     <input wire:model.debounce.300ms="search" type="text" class="form-control"
+                        id="exampleInputIconLeft" placeholder="Search Users" aria-label="Search"
+                        aria-describedby="basic-addon2">
+                  </div>
+               </div> --}}
+                        <div class=" container all-list-sh all-listing-total">
                             <ul class="all-list-wrapper">
-                                @foreach ($result as $item)
-                                    <li class="all-list-item">
+                                @foreach ($results as $item)
+                                    <li id="clist" class=" clist all-list-item">
                                         <div class="eve-box">
                                             <!---LISTING IMAGE--->
                                             <div class="al-img">
@@ -388,15 +396,19 @@
                                                 <div class="list-rat-all">
                                                     <span>No Reviews Yet</span>
                                                 </div>
-                                                <span class="addr">No:2, 4th Avenue, Newyork, USA, Near to
-                                                    Airport</span>
+                                                <span class="addr">{{ $item->address }}</span>
                                                 <span class="pho">876587675 </span>
                                                 <span class="mail">johnitsmes@gmail.com </span>
                                                 <div class="links">
-                                                    <a
-                                                        href="../login2aeb.html?src=https://bizbookdirectorytemplate.com/all-listing/hospitals?list=yes">Get
+                                                    <a href="{{ route('ag_details_models', $item->ag_slug) }}">Get
                                                         quote</a>
-                                                    <a href="../listing/greys-sloan-memorial-hospital.html">view more</a>
+                                                    {{-- <button data-toggle="modal" data-target="#view-modal" id="getUser"
+                                                        class="btn btn-sm btn-info"
+                                                        data-url="{{ route('dynamicModal', $item->id) }}">
+                                                        Submit
+                                                    </button> --}}
+                                                    <a href=" ../listing/greys-sloan-memorial-hospital.html">view
+                                                        more</a>
                                                     <a href="Tel:876587675 ">Call Now</a>
                                                     <a href="https://wa.me/987654621" class="what"
                                                         target="_blank">WhatsApp</a>
@@ -412,87 +424,124 @@
                                             <!---END SAVE--->
                                         </div>
                                     </li>
-                                @endforeach
-                                <!--  Get Quote Pop up box starts  -->
-                                {{-- <section>
-                                    <div class="pop-ups pop-quo">
-                                        <!-- The Modal -->
-                                        <div class="modal fade" id="quote394">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="log-bor">&nbsp;</div>
-                                                    <span class="udb-inst">Send enquiry</span>
-                                                    <button type="button" class="close"
-                                                        data-dismiss="modal">&times;</button>
-                                                    <!-- Modal Header -->
-                                                    <div class="quote-pop">
-                                                        <h4>Get quote</h4>
-                                                        <div id="enq_success" class="log"
-                                                            style="display: none;">
-                                                            <p>Your Enquiry Is Submitted Successfully!!!</p>
+                                    <section>
+                                        <div class="pop-ups pop-quo">
+                                            <!-- The Modal -->
+                                            <div class="modal fade" id="quote-{{ $item->id }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="log-bor">&nbsp;</div>
+                                                        <span class="udb-inst">Send enquiry</span>
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                        <!-- Modal Header -->
+                                                        <div class="quote-pop">
+                                                            <h4>Get quote</h4>
+                                                            <div id="enq_success" class="log"
+                                                                style="display: none;">
+                                                                <p>Your Enquiry Is Submitted Successfully!!!</p>
+                                                            </div>
+                                                            <div id="enq_fail" class="log"
+                                                                style="display: none;">
+                                                                <p>Oops!! Something Went Wrong Try Later!!!</p>
+                                                            </div>
+                                                            <div id="enq_same" class="log"
+                                                                style="display: none;">
+                                                                <p>You cannot make enquiry on your own listing!!</p>
+                                                            </div>
+                                                            <form method="post"
+                                                                action="{{ route('enq_submit', $item->id) }}"
+                                                                onsubmit="return verifyPassword()" name="all_enquiry_form"
+                                                                id="all_enquiry_form">
+
+                                                                <div class="form-group" id="enq_name">
+                                                                    <input id="" type="text" name="enq_name" value=""
+                                                                        required="required" class="form-control"
+                                                                        placeholder="Enter name*">
+                                                                </div>
+                                                                <div id="myDIV" class="form-group" id="enq_desc">
+                                                                    <textarea class="form-control" rows="3" name="enq_desc" placeholder="Enter your query or message"></textarea>
+                                                                </div>
+                                                                <div class="form-group" id="enq_zip">
+                                                                    <input type="text" name="enq_zip" value=""
+                                                                        required="required" class="form-control"
+                                                                        placeholder="Enter Zip*">
+                                                                </div>
+                                                                <div class="form-group" id="enq_zip">
+                                                                    <input type="text" name="enq_zip"
+                                                                        value="{{ $item->id }}" required="required"
+                                                                        class="form-control" placeholder="Enter Zip*">
+                                                                </div>
+                                                                <div class="form-group" id="enq_service">
+                                                                    <select type="text" name="enq_service" value=""
+                                                                        required="required" class="form-control"
+                                                                        placeholder="Enter Zip*">
+                                                                        @foreach ($item->services as $sp)
+                                                                            <option value="{{ $sp->id }}">
+                                                                                {{ $sp->title }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group" id="enq_mobile">
+                                                                    <input type="number" class="form-control" value=""
+                                                                        name="enq_mobile"
+                                                                        placeholder="Enter mobile number *"
+                                                                        title="Phone number starting with 7-9 and remaining 9 digit with 0-9"
+                                                                        required>
+                                                                </div>
+
+                                                                <div class="form-group" id="enq_email">
+                                                                    <input type="email" class="form-control"
+                                                                        placeholder="Enter email*" value="" name="enq_email"
+                                                                        pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                                                        title="Invalid email address" required>
+                                                                </div>
+                                                                <div id="enq_password" class="form-group">
+                                                                    <input type="password" class="form-control"
+                                                                        placeholder="Choose a Password*" value=""
+                                                                        name="password" id="pwsd"
+                                                                        pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                                                        title="Invalid email address" required>
+                                                                </div>
+                                                                <div id="enq_pass_confirm" id="confirm-pwsd"
+                                                                    class="form-group">
+                                                                    <input id="password-confirm" type="password"
+                                                                        class="form-control" name="password_confirmation"
+                                                                        required autocomplete="new-password">
+                                                                </div>
+                                                                {{-- <input type="hidden" id="source"> --}}
+                                                                <button style="" type="" onclick="myFunction()"
+                                                                    id="nextButton" name="enquiry_submit"
+                                                                    class="btn  btn-primary">next</button>
+
+                                                                <button type="submit" id="all_enquiry_submit"
+                                                                    name="enquiry_submit"
+                                                                    class="btn btn-primary">Submit</button>
+                                                            </form>
                                                         </div>
-                                                        <div id="enq_fail" class="log" style="display: none;">
-                                                            <p>Oops!! Something Went Wrong Try Later!!!</p>
-                                                        </div>
-                                                        <div id="enq_same" class="log" style="display: none;">
-                                                            <p>You cannot make enquiry on your own listing!!</p>
-                                                        </div>
-                                                        <form method="post" name="all_enquiry_form" id="all_enquiry_form">
-                                                            <input type="hidden" class="form-control" name="listing_id"
-                                                                value="394" placeholder="" required>
-                                                            <input type="hidden" class="form-control"
-                                                                name="listing_user_id" value="328" placeholder="" required>
-                                                            <input type="hidden" class="form-control"
-                                                                name="enquiry_sender_id" value="" placeholder="" required>
-                                                            <input type="hidden" class="form-control"
-                                                                name="enquiry_source" value="Website" placeholder=""
-                                                                required>
-                                                            <div class="form-group">
-                                                                <input type="text" readonly name="enquiry_name" value=""
-                                                                    required="required" class="form-control"
-                                                                    placeholder="Enter name*">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="email" class="form-control"
-                                                                    placeholder="Enter email*" readonly="readonly" value=""
-                                                                    name="enquiry_email"
-                                                                    pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
-                                                                    title="Invalid email address" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                    readonly="readonly" value="" name="enquiry_mobile"
-                                                                    placeholder="Enter mobile number *"
-                                                                    pattern="[7-9]{1}[0-9]{9}"
-                                                                    title="Phone number starting with 7-9 and remaining 9 digit with 0-9"
-                                                                    required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <textarea class="form-control" rows="3"
-                                                                    name="enquiry_message"
-                                                                    placeholder="Enter your query or message"></textarea>
-                                                            </div>
-                                                            <input type="hidden" id="source">
-                                                            <button type="submit" id="all_enquiry_submit"
-                                                                name="enquiry_submit"
-                                                                class="btn btn-primary">Submit</button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </section> --}}
+                                    </section>
+                                @endforeach
+                                <!--  Get Quote Pop up box starts  -->
+
                                 <!--  Get Quote Pop up box ends  -->
                             </ul>
                             <!--ADS-->
-                            <div class="ban-ati-com ads-all-list">
-                                <a href="https://themeforest.net/item/bizbook-directory-listings-template/25391222"><span>Ad</span><img
-                                        src="{{ asset('assets/images/ads/32207ads.png') }}"></a>
-                            </div>
                             <!--ADS-->
-                            <div id="all-list-pagination-container"></div>
+                            {{-- {{ $result->links() }} --}}
+                            {{-- <ul>
+                     <li id="clist" class="active"><span class="current prev">«</span></li>
+                     <li class="active"><span class="current">1</span></li>
+                     <li class="active"><span class="current next">»</span></li>
+                  </ul> --}}
                         </div>
+                        {{ $results->links('vendor.pagination.custom') }}
+                        {{-- {{ $results->links('pagination::bootstrap-4') }} --}}
+                        {{-- <@livewire('allagency') end --}}
                     </div>
                 </div>
             </div>
@@ -591,6 +640,39 @@
                     </select>
                 </div>
             </div>
+            <div id="view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title">
+                                <i class="glyphicon glyphicon-user"></i> User Profile
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div id="modal-loader" style="display: none; text-align: center;">
+                                <img src="ajax-loader.gif">
+                            </div>
+
+                            <!-- content will be load here -->
+                            <div id="dynamic-content"></div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+
             <script>
                 var customLabel = {
                     restaurant: {
@@ -835,7 +917,6 @@
     <!-- END -->
     <!-- START -->
     <section>
-
     </section>
     <!-- END -->
     <!-- START -->
@@ -892,8 +973,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="enquiry_message"
-                        placeholder="Enter your query or message"></textarea>
+                    <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                 </div>
                 <input type="hidden" id="source">
                 <button type="submit" id="home_slide_enquiry_submit" name="home_slide_enquiry_submit"
@@ -903,4 +983,72 @@
     </div>
     <!-- END -->
     <!-- START -->
+    @push('js')
+        <script>
+            var name = document.getElementById("enq_name");
+            var mobile = document.getElementById("enq_mobile");
+            var email = document.getElementById("enq_email");
+            var desc = document.getElementById("myDIV");
+            var zip = document.getElementById("enq_zip");
+            var submit = document.getElementById("all_enquiry_submit");
+            var next = document.getElementById("nextButton");
+            // var pass_confirm = document.getElementById("enq_pass_confirm");
+            // var pass = document.getElementById("enq_password");
+
+            window.onload = function() {
+                document.getElementById("all_enquiry_submit").hidden = true
+                desc.style.display = "none"
+                zip.style.display = "none"
+                pass.style.display = "none"
+                pass_confirm.style.display = "none"
+
+            }
+
+
+
+
+            //password validation
+
+
+            // function verifyPassword() {
+            //     var pw = document.getElementById("pswd").value;
+            //     //check empty password field  
+            //     if (pw == "") {
+            //         document.getElementById("message").innerHTML = "**Fill the password please!";
+            //         return false;
+            //     }
+
+            //     //minimum password length validation  
+            //     if (pw.length < script 8) {
+            //         document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";
+            //         return false;
+            //     }
+
+            //     //maximum length of password validation  
+            //     if (pw.length > 15) {
+            //         document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";
+            //         return false;
+            //     } else {
+            //         alert("Password is correct");
+            //     }
+            // }
+
+
+
+            function myFunction() {
+                document.getElementById("enq_name").hidden = true
+                document.getElementById("all_enquiry_submit").hidden = false
+                email.style.display = "none"
+                mobile.style.display = "none"
+                desc.style.display = "block"
+                zip.style.display = "block"
+                pass.style.display = "block"
+                pass_confirm.style.display = "block"
+                document.getElementById("nextButton").hidden = true
+                name.style.display = "none"
+
+
+            }
+        </script>
+    @endpush
 @endsection

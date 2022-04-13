@@ -13,6 +13,10 @@ class Sp extends Model
     {
         return $this->belongsTo(Cat::class);
     }
+    public function req()
+    {
+        return $this->belongsTo(Req::class);
+    }
     public function services()
     {
         return $this->hasMany(Service::class);
@@ -20,5 +24,13 @@ class Sp extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function scopeSearch($query, $val)
+    {
+        return $query
+            ->where('ag_name', 'like', '%' . $val . '%');
+        // ->orWhere('desc', 'like', '%' . $val . '%');
+        // ->orWhere('tag', 'like', '%' . $val . '%')
+        // ->orWhere('id', 'like', '%' . $val . '%');
     }
 }

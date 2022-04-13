@@ -189,7 +189,7 @@
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="font-weight-normal">
                                     Not registered?
-                                    <a href="./sign-up.html" class="font-weight-bold">Create account</a>
+                                    <a href="{{route('register')}}" class="font-weight-bold">Create account</a>
                                 </span>
                             </div>
                         </div>

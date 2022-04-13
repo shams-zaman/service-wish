@@ -56,7 +56,7 @@
     <!-- START -->
     <section>
         <div class="list-bann">
-            <img src="{{ asset('assets/images/listing-ban/14944pexels-gustavo-fring-3985159.jpg') }}" alt="">
+            <img src="{{ $result->image }}" alt="">
         </div>
     </section>
     <!-- END -->
@@ -105,7 +105,7 @@
                                 <a href="https://wa.me/987654621" class="cta cta-rev">WhatsApp</a>
                             </li>
                             <li>
-                                <span data-toggle="modal" data-target="#quote" class="pulse cta cta-get">Get
+                                <span data-toggle="modal" data-target="#quotee" class="pulse cta cta-get">Get
                                     quote</span>
                             </li>
 
@@ -291,8 +291,10 @@
                         <span id="Review_Disable">Login And Write Your Review</span>
 
                         <!--LISTING DETAILS: LEFT PART 6-->
-                        <div class="pglist-bg pglist-p-com" style="                                         pointer-events:none; opacity: .5
-                                                                                                             " id="ld-rev">
+                        <div class="pglist-bg pglist-p-com"
+                            style="                                         pointer-events:none; opacity: .5
+                                                                                                                                                 "
+                            id="ld-rev">
                             <div class="pglist-p-com-ti">
                                 <h3>
                                     <span>Write Your</span> Reviews
@@ -357,8 +359,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea id="review_message" disabled placeholder="Write review"
-                                                    name="review_message"></textarea>
+                                                <textarea id="review_message" disabled placeholder="Write review" name="review_message"></textarea>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -486,7 +487,7 @@
                                     </div>
                                     <div class="form-group">
                                         <textarea class="form-control" rows="3" name="enquiry_message"
-                                            placeholder="Enter your query or message"></textarea>
+                                            placeholder="Enter your queryyy or message"></textarea>
                                     </div>
                                     <input type="hidden" id="source">
                                     <button disabled="disabled" type="submit" id="detail_enquiry_submit"
@@ -640,8 +641,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="enquiry_message"
-                        placeholder="Enter your query or message"></textarea>
+                    <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                 </div>
                 <input type="hidden" id="source">
                 <button type="submit" id="home_slide_enquiry_submit" name="home_slide_enquiry_submit"
@@ -649,6 +649,83 @@
             </form>
         </div>
     </div>
+    <section>
+        <div class="pop-ups pop-quo">
+            <!-- The Modal -->
+            <div class="modal fade" id="quotee">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="log-bor">&nbsp;</div>
+                        <span class="udb-inst">Send enquiry</span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <!-- Modal Header -->
+                        <div class="quote-pop">
+                            <h4>Get quote</h4>
+                            <div id="enq_success" class="log" style="display: none;">
+                                <p>Your Enquiry Is Submitted Successfully!!!</p>
+                            </div>
+                            <div id="enq_fail" class="log" style="display: none;">
+                                <p>Oops!! Something Went Wrong Try Later!!!</p>
+                            </div>
+                            <div id="enq_same" class="log" style="display: none;">
+                                <p>You cannot make enquiry on your own listing!!</p>
+                            </div>
+                            <form method="post" action="{{ route('enq_submit', $result->id) }}" name="all_enquiry_form"
+                                id="">
+                                @csrf
+                                <div class="form-group" id="enq_name">
+                                    <input id="" type="text" name="enq_name" value="" required="required"
+                                        class="form-control" placeholder="Enter name*" />
+                                </div>
+                                <div class="form-group" id="enq_service">
+                                    <label style="margin-bottom: 0; margin-left: 1rem;" for="">
+                                        <small>Choose a Service</small> </label>
+                                    <select type="text" name="enq_service" value="" required="required"
+                                        class="form-control" placeholder="Enter Zip*">
+                                        @foreach ($result->services as $sp)
+                                            <option value="{{ $sp->id }}"> {{ $sp->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div id="myDIV" class="form-group" id="enq_desc">
+                                    <textarea class="form-control" rows="3" name="enq_desc" placeholder="Enter your query or message"></textarea>
+                                </div>
+                                <div class="form-group" id="enq_zip">
+                                    <input type="text" name="enq_zip" value="" required="required" class="form-control"
+                                        placeholder="Enter Zip*" />
+                                </div>
+
+
+
+                                <div class="form-group" id="enq_mobile">
+                                    <input type="number" class="form-control" value="" name="enq_mobile"
+                                        placeholder="Enter mobile number *"
+                                        title="Phone number starting with 7-9 and remaining 9 digit with 0-9" required />
+                                </div>
+
+                                <div class="form-group" id="enq_email">
+                                    <input type="email" class="form-control" placeholder="Enter email*" value=""
+                                        name="enq_email"
+                                        pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                        title="Invalid email address" required />
+
+                                </div>
+
+
+
+                                <button style="" type="" onclick="myFunction()" id="nextButton" name="enquiry_submit"
+                                    class="btn btn-primary">next</button>
+
+                                <button type="submit" id="all_enquiry_submit" name="enquiry_submit"
+                                    class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- END -->
     <script>
         $(window).scroll(function() {
@@ -697,4 +774,96 @@
             });
         });
     </script>
+    @push('js')
+        <script>
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                var x = $(".list-pg-bg").offset().top;
+                if (scroll >= x) {
+                    $(".list-det-fix").addClass("list-det-fix-act");
+                } else {
+                    $(".list-det-fix").removeClass("list-det-fix-act");
+                }
+            });
+
+            function scrollNav() {
+                $('.v3-list-ql-inn a').click(function() {
+                    //Toggle Class
+                    $(".active-list").removeClass("active-list");
+                    $(this).closest('li').addClass("active-list");
+                    var theClass = $(this).attr("class");
+                    $('.' + theClass).parent('li').addClass('active-list');
+                    //Animate
+                    $('html, body').stop().animate({
+                        scrollTop: $($(this).attr('href')).offset().top - 130
+                    }, 400);
+                    return false;
+                });
+                $('.scrollTop a').scrollTop();
+            }
+            scrollNav();
+        </script>
+        <script>
+            var name = document.getElementById("enq_name");
+            var mobile = document.getElementById("enq_mobile");
+            var email = document.getElementById("enq_email");
+            var service = document.getElementById("enq_service");
+            var desc = document.getElementById("myDIV");
+            var zip = document.getElementById("enq_zip");
+            var submit = document.getElementById("all_enquiry_submit");
+            var next = document.getElementById("nextButton");
+
+            $(document).ready(function() {
+                document.getElementById("all_enquiry_submit").hidden = true;
+                desc.style.display = "none";
+                zip.style.display = "none";
+                service.style.display = "none";
+
+
+
+                $("#quote").modal("show");
+            });
+
+            function myFunction() {
+
+                document.getElementById("enq_name").hidden = true;
+                document.getElementById("all_enquiry_submit").hidden = false;
+                email.style.display = "none";
+                next.style.display = "none";
+                mobile.style.display = "none";
+                service.style.display = "block";
+                desc.style.display = "block";
+                zip.style.display = "block";
+                pass.style.display = "block";
+                pass_confirm.style.display = "block";
+                document.getElementById("nextButton").hidden = true;
+                name.style.display = "none";
+            }
+
+
+
+            // function verifyPassword() {
+            //     var pw = document.getElementById("pswd").value;
+            //     //check empty password field  
+            //     if (pw == "") {
+            //         document.getElementById("message").innerHTML = "**Fill the password please!";
+            //         return false;
+            //     }
+
+            //     //minimum password length validation  
+            //     if (pw.length < script 8) {
+            //         document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";
+            //         return false;
+            //     }
+
+            //     //maximum length of password validation  
+            //     if (pw.length > 15) {
+            //         document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";
+            //         return false;
+            //     } else {
+            //         alert("Password is correct");
+            //     }
+            // }
+        </script>
+    @endpush
 @endsection

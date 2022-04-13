@@ -15,14 +15,17 @@ class TagSeeder extends Seeder
     public function run()
     {
         DB::table('tags')->insert([
-            'slug' => 'find-the-best-services',
+            'slug' => 'Find the best services',
+            'tag_name' => 'find-the-best-services',
 
         ]);
         DB::table('tags')->insert([
+            'tag_name' => 'web Development',
             'slug' => 'web-development',
 
         ]);
         DB::table('tags')->insert([
+            'tag_name' => 'Seo',
             'slug' => 'seo',
 
         ]);

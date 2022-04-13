@@ -287,8 +287,7 @@
                                                 required="">
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" rows="3" name="enquiry_message"
-                                                placeholder="Enter your query or message"></textarea>
+                                            <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                                         </div>
                                         <input type="hidden" id="source">
                                         <button type="submit" id="home_slide_enquiry_submit"
@@ -393,10 +392,19 @@
                                                 <span class="pho">876587675 </span>
                                                 <span class="mail">johnitsmes@gmail.com </span>
                                                 <div class="links">
-                                                    <a
-                                                        href="../login2aeb.html?src=https://bizbookdirectorytemplate.com/all-listing/hospitals?list=yes">Get
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#quote394">
+                                                        Launch demo modal
+                                                    </button>
+                                                    {{-- Model endddd --}}
+
+
+                                                    {{-- Model endddd --}}
+
+                                                    <a data-toggle="modal" data-target="#quote394" href="#">Get
                                                         quote</a>
-                                                    <a href="../listing/greys-sloan-memorial-hospital.html">view more</a>
+                                                    <a class=" btn-warning" data-toggle="modal" data-target="#quote394"
+                                                        href="#"><b>Get Quote</b></a>
                                                     <a href="Tel:876587675 ">Call Now</a>
                                                     <a href="https://wa.me/987654621" class="what"
                                                         target="_blank">WhatsApp</a>
@@ -414,7 +422,7 @@
                                     </li>
                                 @endforeach
                                 <!--  Get Quote Pop up box starts  -->
-                                {{-- <section>
+                                <section>
                                     <div class="pop-ups pop-quo">
                                         <!-- The Modal -->
                                         <div class="modal fade" id="quote394">
@@ -468,9 +476,7 @@
                                                                     required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <textarea class="form-control" rows="3"
-                                                                    name="enquiry_message"
-                                                                    placeholder="Enter your query or message"></textarea>
+                                                                <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                                                             </div>
                                                             <input type="hidden" id="source">
                                                             <button type="submit" id="all_enquiry_submit"
@@ -482,7 +488,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section> --}}
+                                </section>
                                 <!--  Get Quote Pop up box ends  -->
                             </ul>
                             <!--ADS-->
@@ -904,8 +910,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="enquiry_message"
-                        placeholder="Enter your query or message"></textarea>
+                    <textarea class="form-control" rows="3" name="enquiry_message" placeholder="Enter your query or message"></textarea>
                 </div>
                 <input type="hidden" id="source">
                 <button type="submit" id="home_slide_enquiry_submit" name="home_slide_enquiry_submit"

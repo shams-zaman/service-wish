@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/theme-color.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fonts.css') }}">
+    @stack('css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -257,14 +258,14 @@
                                 <ul class="bl">
 
                                     <li>
-                                        <a href="../login.html">Sign in</a>
+                                        <a href="{{route('login')}}">Sign in</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-success" href="../login3d2e.html?login=register">Create an
+                                        <a class="btn btn-success" href="{{route('register')}}">Create an
                                             account</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-info" href="../pricing-details.html">Become a Devloper</a>
+                                        <a class="btn btn-info" href="{{route('register')}}">Become a Devloper</a>
                                     </li>
                                 </ul>
                                 <!--MOBILE MENU-->
@@ -276,13 +277,13 @@
                                             <h4></h4>
                                             <ul>
                                                 <li>
-                                                    <a href="../pricing-details.html">Add business</a>
+                                                    <a href="{{route('login')}}">Add business</a>
                                                 </li>
                                                 <li>
-                                                    <a href="../login.html">Sign in</a>
+                                                    <a href="{{route('login')}}">Sign in</a>
                                                 </li>
                                                 <li>
-                                                    <a href="../login3d2e.html?login=register">Create an account</a>
+                                                    <a href="{{route('register')}}">Create an account</a>
                                                 </li>
                                             </ul>
                                         </div>

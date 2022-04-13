@@ -15,4 +15,8 @@ class Cat extends Model
     {
         return $this->hasMany(Sp::class);
     }
+    public function blogs()
+    {
+        return $this->belongsToMany(Blog::class, 'blog_cat');
+    }
 }

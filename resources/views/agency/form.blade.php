@@ -25,7 +25,7 @@
 
                 <div style="width: 100%" class="card  border-0 shadow components-section">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('agency-store') }}">
+                        <form method="POST" action="{{ route('agency-store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4">
                                 <div class="col-lg-5   col-sm-6">
@@ -33,16 +33,36 @@
                                             class="form-text  text-muted">** to be unique.</small>
                                         <input type="text" name="ag_name" class="form-control" id="ag_name"
                                             aria-describedby="emailHelp">
+                                        @error('ag_name')
+                                            <div style="color: red" class="error">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputIconLeft">Address</label>
                                         <div class="input-group"><input name="address" type="text" class="form-control"
-                                                id="exampleInputIconLeft" placeholder="Address" aria-label="address"></div>
+                                                id="exampleInputIconLeft" placeholder="Address" aria-label="address">
+                                            @error('address')
+                                                <div style="color: red" class="error">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
+                                    {{-- <div class="mb-3">
+                                        <label for="exampleInputIconLeft">Address</label>
+                                        <div class="input-group"><input name="address" type="text" class="form-control"
+                                                id="exampleInputIconLeft" placeholder="Address" aria-label="address">
+                                            @error('address')
+                                                <div style="color: red" class="error">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div> --}}
                                     <div class="mb-3">
                                         <label for="exampleInputIconRight">Zip</label>
                                         <div class="input-group"><input type="text" class="form-control" name="zip"
-                                                id="exampleInputIconRight" placeholder="zip" aria-label="zip"> </div>
+                                                id="exampleInputIconRight" placeholder="zip" aria-label="zip">
+                                            @error('zip')
+                                                <div style="color: red" class="error">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 offset-lg-1  col-sm-6">
@@ -57,21 +77,31 @@
 
                                         </select>
                                     </div>
-                                    <div class="mb-3"><label for="disabledTextInput">Name</label>
+                                    <div class="mb-3"><label for="disabledTextInput">Mobile</label>
                                         <input type="number" id="mobile" class="form-control" name="mobile"
                                             placeholder="mobile No:">
+                                        @error('mobile')
+                                            <div style="color: red" class="error">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3"><label for="formFile" class="form-label">Default file
-                                            input example</label> <input class="form-control" type="file" id="formFile">
+                                            input example</label> <input class="form-control" name="sp_cover_img"
+                                            type="file" id="formFile">
+                                        @error('sp_cover_img')
+                                            <div style="color: red" class="error">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="row  mb-2">
                                 <div class="mb-1">
                                     <label for="desc"> Add Description</label>
-                                    <textarea class="form-control" name="desc" id="about_agency" cols="20"
-                                        rows="5">Heloo
-                                                                                                                                                                                                                                                                          </textarea>
+                                    <textarea class="form-control" name="desc" id="about_agency" cols="20" rows="5">Heloo  </textarea>
+                                    @error('sp_cover_img')
+                                        <div style="color: red" class="error">{{ $message }}</div>
+                                    @enderror
+
+
                                 </div>
                             </div>
                             <div class="row mb-1">
