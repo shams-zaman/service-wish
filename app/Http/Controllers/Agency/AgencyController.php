@@ -269,6 +269,8 @@ class AgencyController extends Controller
       $user = User::where('id', $id);
       $user->update(['is_updated' => true]);
       return redirect()->route('agency-pending');
+    }else{
+      return 'something went wrong !!'
     }
   }
 }
